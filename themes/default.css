@@ -1,0 +1,17 @@
+:root {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --accent-color: #6366f1;
+  --accent-hover: #4f46e5;
+  --border-color: #e2e8f0;
+  --input-bg: #f1f5f9;
+  --input-focus-border: #818cf8;
+  --shadow-color: rgba(99, 102, 241, 0.06);
+  --card-hover-shadow: rgba(99, 102, 241, 0.15);
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --reader-bg: #ffffff;
+  --reader-text: #1e293b;
+}

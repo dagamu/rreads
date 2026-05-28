@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RREADS — Biblioteca Privada</title>
+  <!-- Base Theme Stylesheet (swapped dynamically) -->
+  <link id="theme-link" rel="stylesheet" href="themes/default.css">
+  <!-- Core SPA Stylesheet -->
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+  <!-- Global Loader Overlay -->
+  <div id="global-loader" class="loading-overlay hidden">
+    <div class="spinner"></div>
+  </div>
+
+  <div id="app">
+    
+    <!-- 1. Login View -->
+    <section id="login-section" class="login-container">
+      <div class="login-card">
+        <div class="login-logo">R</div>
+        <h1 class="login-title">RREADS</h1>
+        <p class="login-subtitle">Biblioteca de Lectura Privada</p>
+        
+        <form id="login-form">
+          <div class="form-group">
+            <label for="password-input" class="form-label">Contraseña de acceso</label>
+            <input type="password" id="password-input" class="form-input" placeholder="••••••••" required autocomplete="current-password">
+          </div>
+          <button type="submit" class="btn">Entrar a la biblioteca</button>
+          <button type="button" id="btn-guest-login" class="btn" style="margin-top: 12px; background-color: transparent; border: 1px solid var(--border-color); color: var(--text-primary); box-shadow: none;">Acceder como Invitado</button>
+        </form>
+        
+        <div id="login-error" class="login-error"></div>
+      </div>
+    </section>
+
+    <!-- 2. Catalog/Gallery View -->
+    <section id="catalog-section" class="hidden">
+      <header class="main-header">
+        <div id="logo-section" class="logo-section">
+          <div class="logo-icon">R</div>
+          <span class="logo-text">RREADS</span>
+          <span id="guest-badge" class="book-tag hidden" style="background-color: var(--accent-color); color: white; border: none; font-size: 10px; font-weight: 700; margin-left: 8px;">Invitado</span>
+        </div>
+        
+        <div class="controls-section">
+          <div class="search-wrapper">
+            <!-- Search icon SVG -->
+            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="search-bar" class="search-input" placeholder="Buscar por título, autor, género...">
+          </div>
+          
+          <div class="select-wrapper">
+            <select id="sort-select">
+              <option value="added">Fecha Añadida</option>
+              <option value="title">Título (A-Z)</option>
+              <option value="author">Autor (A-Z)</option>
+              <option value="year">Año (Nuevo-Viejo)</option>
+            </select>
+          </div>
+
+          <div class="select-wrapper">
+            <select id="global-theme-select">
+              <option value="default">Tema Claro</option>
+              <option value="dark">Tema Oscuro</option>
+              <option value="sepia">Tema Sepia</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="user-controls">
+          <button id="btn-logout" class="icon-btn" title="Cerrar Sesión">
+            <!-- Logout icon SVG -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+          </button>
+        </div>
+      </header>
+      
+      <main class="gallery-container">
+        <div id="catalog-grid" class="gallery-grid">
+          <!-- Rendered dynamically -->
+        </div>
+      </main>
+    </section>
+
+    <!-- 3. Reader View -->
+    <section id="reader-section" class="reader-container hidden">
+      <header class="reader-header">
+        <div class="reader-title-section">
+          <button id="btn-reader-back" class="icon-btn" title="Volver al catálogo">
+            <!-- Back Arrow SVG -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+          </button>
+          <span id="reader-title" class="reader-book-title">Título del Libro</span>
+        </div>
+        
+        <div class="reader-controls">
+          <!-- Read Level Selector (populated dynamically) -->
+          <div class="select-wrapper hidden" id="wrapper-read-level" style="margin-right: 8px;">
+            <select id="reader-level-select">
+              <option value="0">Completo (Nivel 0)</option>
+            </select>
+          </div>
+          
+          <button id="btn-reader-settings" class="icon-btn" title="Ajustes de Lectura">
+            <!-- Settings gear SVG -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+          </button>
+        </div>
+      </header>
+      
+      <!-- Reader Scrollable Container -->
+      <main id="reader-body" class="reader-body">
+        <div id="reader-content" class="reader-content">
+          <!-- Book content injected dynamically -->
+        </div>
+      </main>
+
+      <!-- Reader Floating Settings Panel -->
+      <div id="reader-settings-panel" class="reader-settings-panel hidden">
+        <!-- 1. Font Size -->
+        <div class="settings-row">
+          <span>Tamaño Letra</span>
+          <div class="settings-btn-group">
+            <button class="settings-btn" data-setting="font-size" data-value="-2">A-</button>
+            <button class="settings-btn" data-setting="font-size" data-value="2">A+</button>
+          </div>
+        </div>
+        
+        <!-- 2. Line Height -->
+        <div class="settings-row">
+          <span>Interlineado</span>
+          <div class="settings-btn-group">
+            <button class="settings-btn" data-setting="line-height" data-value="1.4">1.4</button>
+            <button class="settings-btn active" data-setting="line-height" data-value="1.6">1.6</button>
+            <button class="settings-btn" data-setting="line-height" data-value="1.8">1.8</button>
+            <button class="settings-btn" data-setting="line-height" data-value="2.0">2.0</button>
+          </div>
+        </div>
+        
+        <!-- 3. Reading Width -->
+        <div class="settings-row">
+          <span>Ancho Lectura</span>
+          <div class="settings-btn-group">
+            <button class="settings-btn" data-setting="width" data-value="600">Angosto</button>
+            <button class="settings-btn active" data-setting="width" data-value="720">Medio</button>
+            <button class="settings-btn" data-setting="width" data-value="840">Ancho</button>
+            <button class="settings-btn" data-setting="width" data-value="100%">100%</button>
+          </div>
+        </div>
+        
+        <!-- 4. Local Reader Theme -->
+        <div class="settings-row">
+          <span>Tema Lector</span>
+          <div class="settings-btn-group">
+            <button class="settings-btn active" data-setting="theme" data-value="default">Claro</button>
+            <button class="settings-btn" data-setting="theme" data-value="dark">Oscuro</button>
+            <button class="settings-btn" data-setting="theme" data-value="sepia">Sepia</button>
+          </div>
+        </div>
+        
+        <!-- 5. Level Indicators Toggle -->
+        <div class="settings-row">
+          <span>Bordes de Nivel</span>
+          <button id="btn-toggle-indicators" class="settings-btn active">Mostrar</button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Javascript Modules -->
+  <script src="js/crypto.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/levels.js"></script>
+  <script src="js/catalog.js"></script>
+  <script src="js/reader.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>

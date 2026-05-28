@@ -1,0 +1,16 @@
+/src/
+/src_preview/
+/node_modules/
+.antigravitycli
+.idea/
+.vscode/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+db.sqlite3
+.DS_Store
+.env
+.venv
+venv/
+env/
