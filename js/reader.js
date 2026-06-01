@@ -129,7 +129,7 @@ function populateLevelsSelect(levels) {
     levels.forEach(lvl => {
       const opt = document.createElement('option');
       opt.value = lvl;
-      opt.textContent = lvl === 0 ? 'Libro Completo' : `Nivel de Resumen ${lvl}`;
+      opt.textContent = lvl === 0 ? 'Libro Completo' : `Nivel ${lvl}`;
       select.appendChild(opt);
     });
     select.value = '0';

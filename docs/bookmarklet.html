@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RREADS — Instalador de Bookmarklet de Extracción</title>
+  <link rel="stylesheet" href="../themes/default.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    body {
+      background: radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
+                  radial-gradient(circle at 90% 80%, rgba(129, 140, 248, 0.08) 0%, transparent 40%),
+                  var(--bg-primary);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .installer-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 40px;
+      border-radius: 24px;
+      width: 100%;
+      max-width: 600px;
+      box-shadow: 0 20px 40px var(--shadow-color);
+      text-align: center;
+    }
+    .installer-logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--accent-color), #818cf8);
+      border-radius: 16px;
+      color: white;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 16px rgba(99, 102, 241, 0.2);
+    }
+    .installer-title {
+      font-size: 26px;
+      margin-bottom: 12px;
+    }
+    .installer-desc {
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+    .btn-bookmarklet {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--accent-color), #818cf8);
+      color: white;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      padding: 14px 28px;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.25);
+      cursor: grab;
+      user-select: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: none;
+      margin-bottom: 24px;
+    }
+    .btn-bookmarklet:active {
+      cursor: grabbing;
+      transform: scale(0.98);
+    }
+    .btn-bookmarklet:hover {
+      box-shadow: 0 10px 24px rgba(99, 102, 241, 0.35);
+      transform: translateY(-2px);
+    }
+    .steps {
+      text-align: left;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .steps h3 {
+      font-size: 16px;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+    }
+    .steps ol {
+      margin-left: 20px;
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .code-box {
+      position: relative;
+      margin-top: 16px;
+    }
+    .code-box textarea {
+      width: 100%;
+      height: 80px;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: var(--text-secondary);
+      font-family: monospace;
+      font-size: 11px;
+      padding: 10px;
+      resize: none;
+      outline: none;
+    }
+    .btn-copy {
+      margin-top: 8px;
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 6px 12px;
+      font-size: 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-copy:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--accent-color);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="installer-card">
+    <div class="installer-logo">R</div>
+    <h1 class="installer-title">Bookmarklet de Extracción</h1>
+    <p class="installer-desc">
+      Este bookmarklet te permite extraer cualquier capítulo de la Biblia desde el sitio web fuente directamente en el formato HTML limpio estructurado por versículos de RREADS.
+    </p>
+
+    <!-- The Bookmarklet Link -->
+    <a class="btn-bookmarklet" id="bookmarklet-link" href="">Extraer Biblia RREADS</a>
+
+    <div class="steps">
+      <h3>Instrucciones de Instalación:</h3>
+      <ol>
+        <li>Asegúrate de que la barra de marcadores/favoritos de tu navegador esté visible (<code>Ctrl + Mayús + B</code> o <code>Cmd + Shift + B</code>).</li>
+        <li><strong>Arrastra</strong> el botón de arriba <strong>"Extraer Biblia RREADS"</strong> y suéltalo en tu barra de marcadores.</li>
+        <li>Ve a la página del capítulo de la Biblia que quieres copiar.</li>
+        <li>Haz clic en el marcador recién añadido. Verás una notificación confirmando que el capítulo ha sido copiado al portapapeles.</li>
+        <li>Pega el contenido directamente dentro de tu archivo, por ejemplo en <code>src/biblia_salmos.html</code>.</li>
+      </ol>
+    </div>
+
+    <div>
+      <span style="font-size: 12px; color: var(--text-secondary);">¿No puedes arrastrar el botón? Copia el código manualmente e insértalo en un marcador:</span>
+      <div class="code-box">
+        <textarea id="bookmarklet-code" readonly></textarea>
+        <button class="btn-copy" onclick="copyCode()">Copiar Código</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast">¡Código copiado al portapapeles!</div>
+
+  <script>
+    // Raw bookmarklet source
+    const code = `javascript:(function(){const%20titleEl=document.querySelector('%23rightpanel%20h1,%20.wrapper%20h1,%20h1');const%20titleText=titleEl?titleEl.textContent.trim():'';let%20output=\`<h2>\${titleText}</h2>\\n\`;const%20paragraphs=document.querySelectorAll('.chapter%20p');paragraphs.forEach(p=>{let%20pContent='';const%20numverses=p.querySelectorAll('.numverse');numverses.forEach(numEl=>{const%20verseNum=numEl.textContent.replace(/\\s+/g,'').trim();let%20textEl=numEl.nextElementSibling;while(textEl&&!textEl.classList.contains('versetxt')){textEl=textEl.nextElementSibling}if(textEl){let%20textHtml=textEl.innerHTML.replace(/\\s+/g,'%20').replace(/&nbsp;/g,'%20').trim();pContent+=\`%20%20<sup>\${verseNum}</sup>%20\${textHtml}\\n\`}});if(pContent){output+=\`<p>\\n\${pContent}</p>\\n\`}});function%20copyToClipboard(text){if(navigator.clipboard&&window.isSecureContext){return%20navigator.clipboard.writeText(text)}else{const%20textArea=document.createElement('textarea');textArea.value=text;textArea.style.position='fixed';textArea.style.left='-999999px';textArea.style.top='-999999px';document.body.appendChild(textArea);textArea.focus();textArea.select();return%20new%20Promise((res,rej)=>{document.execCommand('copy')?res():rej();textArea.remove()})}}function%20showToast(message){const%20toast=document.createElement('div');toast.textContent=message;toast.style.position='fixed';toast.style.bottom='20px';toast.style.right='20px';toast.style.background='#6366f1';toast.style.color='#ffffff';toast.style.padding='12px%2024px';toast.style.borderRadius='8px';toast.style.boxShadow='0%204px%2012px%20rgba(0,0,0,0.15)';toast.style.fontFamily='sans-serif';toast.style.fontSize='14px';toast.style.fontWeight='bold';toast.style.zIndex='999999';toast.style.transition='opacity%200.3s%20ease,%20transform%200.3s%20ease';toast.style.transform='translateY(20px)';toast.style.opacity='0';document.body.appendChild(toast);setTimeout(()=>{toast.style.transform='translateY(0)';toast.style.opacity='1'},10);setTimeout(()=>{toast.style.transform='translateY(20px)';toast.style.opacity='0';setTimeout(()=>{toast.remove()},300)},2500)}copyToClipboard(output).then(()=>showToast('¡Capítulo%20copiado%20al%20portapapeles!')).catch(err=>{console.error(err);alert('Error%20al%20copiar%20al%20portapapeles.')})})();`;
+
+    document.getElementById('bookmarklet-link').href = code;
+    document.getElementById('bookmarklet-code').value = code;
+
+    function copyCode() {
+      const textarea = document.getElementById('bookmarklet-code');
+      textarea.select();
+      document.execCommand('copy');
+      
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2000);
+    }
+  </script>
+</body>
+</html>

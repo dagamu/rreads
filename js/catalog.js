@@ -247,7 +247,7 @@ function generateCoverSVG(title, author) {
   
   const spans = lines.map((line, idx) => {
     const yPos = startY + (idx * lineSpacing);
-    return `<text x="200" y="${yPos}" font-family="'Outfit', 'Inter', sans-serif" font-size="26" font-weight="700" fill="#ffffff" text-anchor="middle" dominant-baseline="middle">${escapeHTML(line)}</text>`;
+    return `<text x="200" y="${yPos}" font-family="'Inter', 'Outfit', serif" font-size="26" font-weight="700" fill="#ffffff" text-anchor="middle" dominant-baseline="middle">${escapeHTML(line)}</text>`;
   }).join('\n  ');
   
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600" width="400" height="600">
@@ -269,7 +269,7 @@ function generateCoverSVG(title, author) {
   ${spans}
   
   <line x1="120" y1="430" x2="280" y2="430" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
-  <text x="200" y="470" font-family="'Outfit', 'Inter', sans-serif" font-size="18" font-weight="500" fill="rgba(255,255,255,0.85)" text-anchor="middle" dominant-baseline="middle">${escapeHTML(author)}</text>
+  <text x="200" y="470" font-family="'Inter', 'Outfit', serif" font-size="18" font-weight="500" fill="rgba(255,255,255,0.85)" text-anchor="middle" dominant-baseline="middle">${escapeHTML(author)}</text>
 </svg>`;
 
   return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);

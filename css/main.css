@@ -1,5 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
 
+@font-face {
+  font-family: 'Galaxie Copernicus';
+  src: url('../assets/galaxie_copernicus.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Tiempos';
+  src: url('../assets/tiempos.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -7,7 +21,7 @@
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', serif;
   background-color: var(--bg-primary);
   color: var(--text-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -345,6 +359,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 6px;
   line-height: 1.3;
   display: -webkit-box;
+  line-clamp: 2;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
@@ -432,7 +447,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .reader-content {
   width: 100%;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Tiempos', serif;
   line-height: 1.6;
   font-size: 18px;
 }
@@ -441,6 +456,7 @@ h1, h2, h3, h4, h5, h6 {
 .reader-content p {
   margin-bottom: 1.5em;
   text-indent: 1.5em;
+  text-align: justify;
 }
 
 .reader-content p:first-of-type {
@@ -459,6 +475,7 @@ h1, h2, h3, h4, h5, h6 {
 .reader-content h1 { font-size: 2.2em; }
 .reader-content h2 { font-size: 1.8em; }
 .reader-content h3 { font-size: 1.4em; }
+.reader-content sup { font-size: 0.6em; }
 
 /* Isolated config modal */
 .reader-settings-panel {
@@ -473,7 +490,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 20px;
   box-shadow: 0 10px 25px var(--shadow-color);
   z-index: 1000;
-  width: 280px;
+  width: 430px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -598,15 +615,15 @@ h1, h2, h3, h4, h5, h6 {
 
 /* When indicators are toggled ON */
 .show-indicators [data-read-level] {
-  padding-left: 14px;
+  padding-left: 50px;
   margin-left: -17px;
 }
 
-.show-indicators [data-read-level="1"] { border-left-color: #94a3b8; } /* gray */
-.show-indicators [data-read-level="2"] { border-left-color: #3b82f6; } /* blue */
-.show-indicators [data-read-level="3"] { border-left-color: #10b981; } /* green */
-.show-indicators [data-read-level="4"] { border-left-color: #f97316; } /* orange */
-.show-indicators [data-read-level="5"] { border-left-color: #ef4444; } /* red */
+.show-indicators [data-read-level="1"] { border-left-color: rgba(148, 163, 184, 0.5) } /* gray */
+.show-indicators [data-read-level="2"] { border-left-color: rgba(59, 130, 246, 0.5) } /* blue */
+.show-indicators [data-read-level="3"] { border-left-color: rgba(16, 185, 129, 0.5) } /* green */
+.show-indicators [data-read-level="4"] { border-left-color: rgba(249, 115, 22, 0.5) } /* orange */
+.show-indicators [data-read-level="5"] { border-left-color: rgba(239, 68, 68, 0.5) } /* red */
 .show-indicators [data-read-level]:not([data-read-level="1"]):not([data-read-level="2"]):not([data-read-level="3"]):not([data-read-level="4"]):not([data-read-level="5"]) {
-  border-left-color: #ec4899; /* pink/magenta */
+  border-left-color: rgba(236, 72, 153, 0.5); /* pink/magenta */
 }

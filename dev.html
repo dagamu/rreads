@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RREADS — Biblioteca Privada</title>
+  <title>RREADS — Biblioteca Privada (Desarrollo)</title>
   <!-- Base Theme Stylesheet (swapped dynamically) -->
   <link id="theme-link" rel="stylesheet" href="themes/default.css">
   <!-- Core SPA Stylesheet -->
@@ -18,33 +18,13 @@
 
   <div id="app">
     
-    <!-- 1. Login View -->
-    <section id="login-section" class="login-container">
-      <div class="login-card">
-        <div class="login-logo">R</div>
-        <h1 class="login-title">RREADS</h1>
-        <p class="login-subtitle">Biblioteca de Lectura Privada</p>
-        
-        <form id="login-form">
-          <div class="form-group">
-            <label for="password-input" class="form-label">Contraseña de acceso</label>
-            <input type="password" id="password-input" class="form-input" placeholder="••••••••" required autocomplete="current-password">
-          </div>
-          <button type="submit" class="btn">Entrar a la biblioteca</button>
-          <button type="button" id="btn-guest-login" class="btn" style="margin-top: 12px; background-color: transparent; border: 1px solid var(--border-color); color: var(--text-primary); box-shadow: none;">Acceder como Invitado</button>
-        </form>
-        
-        <div id="login-error" class="login-error"></div>
-      </div>
-    </section>
-
-    <!-- 2. Catalog/Gallery View -->
-    <section id="catalog-section" class="hidden">
+    <!-- 1. Catalog/Gallery View -->
+    <section id="catalog-section">
       <header class="main-header">
         <div id="logo-section" class="logo-section">
           <div class="logo-icon">R</div>
-          <span class="logo-text">RREADS</span>
-          <span id="guest-badge" class="book-tag hidden" style="background-color: var(--accent-color); color: white; border: none; font-size: 10px; font-weight: 700; margin-left: 8px;">Invitado</span>
+          <span class="logo-text">RREADS DEV</span>
+          <span class="book-tag" style="background-color: var(--accent-color); color: white; border: none; font-size: 10px; font-weight: 700; margin-left: 8px;">Vista Previa</span>
         </div>
         
         <div class="controls-section">
@@ -73,17 +53,6 @@
               <option value="sepia">Tema Sepia</option>
             </select>
           </div>
-        </div>
-        
-        <div class="user-controls">
-          <button id="btn-logout" class="icon-btn" title="Cerrar Sesión">
-            <!-- Logout icon SVG -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-              <polyline points="16 17 21 12 16 7"></polyline>
-              <line x1="21" y1="12" x2="9" y2="12"></line>
-            </svg>
-          </button>
         </div>
       </header>
       
@@ -186,12 +155,9 @@
   </div>
 
   <!-- Javascript Modules -->
-  <script src="js/crypto.js"></script>
   <script src="js/ui.js"></script>
   <script src="js/levels.js"></script>
-  <script src="js/catalog.js"></script>
-  <script src="js/reader.js"></script>
-  <script src="js/app.js"></script>
+  <script src="js/dev.js"></script>
 
 </body>
 </html>
